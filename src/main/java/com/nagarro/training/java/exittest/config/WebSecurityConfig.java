@@ -1,11 +1,10 @@
 package com.nagarro.training.java.exittest.config;
 
 import com.nagarro.training.java.exittest.security.JwtAuthenticationEntryPoint;
-import com.nagarro.training.java.exittest.web.filter.JwtRequestFilter;
+import com.nagarro.training.java.exittest.security.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -63,21 +62,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // Our public endpoints
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/author/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/author/search").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/book/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/book/search").permitAll()
+                .antMatchers("/api/public/**").permitAll()
                 // Our private endpoints
                 .anyRequest().authenticated();
-
-//        // We don't need CSRF for this example
-//        http.csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/**").permitAll()
-//                .and()
-//                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-//                .and().sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 

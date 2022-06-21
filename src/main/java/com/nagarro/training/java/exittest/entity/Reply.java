@@ -17,6 +17,9 @@ public class Reply {
     @Column(name = "body", nullable = false)
     private String body;
 
+    @Column(name = "accepted_answer", nullable = false)
+    private Boolean acceptedAnswer = Boolean.FALSE;
+
     @Column(name = "created_on")
     @CreationTimestamp
     private LocalDateTime createdOn;
@@ -43,6 +46,14 @@ public class Reply {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Boolean getAcceptedAnswer() {
+        return acceptedAnswer;
+    }
+
+    public void setAcceptedAnswer(Boolean acceptedAnswer) {
+        this.acceptedAnswer = acceptedAnswer;
     }
 
     public LocalDateTime getCreatedOn() {

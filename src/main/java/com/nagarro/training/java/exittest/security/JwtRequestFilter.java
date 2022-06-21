@@ -1,4 +1,4 @@
-package com.nagarro.training.java.exittest.web.filter;
+package com.nagarro.training.java.exittest.security;
 
 import com.nagarro.training.java.exittest.security.JwtTokenUtil;
 import com.nagarro.training.java.exittest.security.JwtUserDetailsService;

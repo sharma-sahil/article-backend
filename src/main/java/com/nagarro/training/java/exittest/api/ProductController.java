@@ -1,4 +1,4 @@
-package com.nagarro.training.java.exittest.web.api;
+package com.nagarro.training.java.exittest.api;
 
 import com.nagarro.training.java.exittest.entity.Product;
 import com.nagarro.training.java.exittest.service.ProductService;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/product")
 public class ProductController {
 

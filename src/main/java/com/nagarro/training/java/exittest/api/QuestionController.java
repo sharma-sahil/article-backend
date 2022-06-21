@@ -1,4 +1,4 @@
-package com.nagarro.training.java.exittest.web.api;
+package com.nagarro.training.java.exittest.api;
 
 import com.nagarro.training.java.exittest.dto.AddQuestionRequest;
 import com.nagarro.training.java.exittest.dto.PageResponse;
@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/question")
 public class QuestionController {
 
@@ -39,6 +40,11 @@ public class QuestionController {
     public PageResponse<List<QuestionPreviewResponse>> getUserQuestions(@RequestParam("pageNumber") Integer pageNumber,
                                                                         @RequestParam("pageSize") Integer pageSize) {
         return this.questionService.getUserQuestions(pageNumber, pageSize);
+    }
+
+    @PutMapping("/{questionId}/close")
+    public QuestionDetailsResponse closeQuestion(@PathVariable("questionId") Long questionId, @RequestParam("acceptedReply") Long acceptedReplyId) {
+        return this.questionService.closeQuestion(questionId, acceptedReplyId);
     }
 
 }

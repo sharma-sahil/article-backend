@@ -1,12 +1,13 @@
-package com.nagarro.training.java.exittest.web.api;
+package com.nagarro.training.java.exittest.api;
 
+import com.nagarro.training.java.exittest.dto.CreateUserRequest;
 import com.nagarro.training.java.exittest.dto.UserResponse;
-import com.nagarro.training.java.exittest.entity.UserEntity;
 import com.nagarro.training.java.exittest.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/api")
 public class UserManagementController {
 
@@ -14,8 +15,8 @@ public class UserManagementController {
     private UserManagementService userManagementService;
 
     @PostMapping("/public/user")
-    public UserEntity createUser(@RequestBody UserEntity userEntity) {
-        return this.userManagementService.createUser(userEntity);
+    public UserResponse createUser(@RequestBody CreateUserRequest createUserRequest) {
+        return this.userManagementService.createUser(createUserRequest);
     }
 
     @GetMapping("/user/{id}")

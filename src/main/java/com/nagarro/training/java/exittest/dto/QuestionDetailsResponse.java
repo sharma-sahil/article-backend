@@ -1,5 +1,7 @@
 package com.nagarro.training.java.exittest.dto;
 
+import com.nagarro.training.java.exittest.enums.QuestionStatus;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,7 +21,9 @@ public class QuestionDetailsResponse {
 
     private LocalDateTime createdOn;
 
-    List<ReplyResponse> replies;
+    private QuestionStatus status;
+
+    private List<ReplyResponse> replies;
 
     public Long getId() {
         return id;
@@ -75,6 +79,14 @@ public class QuestionDetailsResponse {
 
     public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public QuestionStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(QuestionStatus status) {
+        this.status = status;
     }
 
     public List<ReplyResponse> getReplies() {

@@ -32,7 +32,7 @@ public class ReplyService {
 
     public ReplyResponse addReply(AddReplyRequest addReplyRequest) {
         Question question = this.questionRepository.findById(addReplyRequest.getQuestion())
-                .orElseThrow(() -> new CustomException("Invalid Question id " + addReplyRequest.getQuestion() + " passed in the request", "invalid.questionId"));
+                .orElseThrow(() -> new CustomException("Invalid Question id " + addReplyRequest.getQuestion() + " passed in the request", "invalid.question.id"));
 
         UserPrincipal userPrincipal = SecurityUtils.getUserPrincipal();
         UserEntity userEntity = this.userRepository.findByUsername(userPrincipal.getUsername()).get();

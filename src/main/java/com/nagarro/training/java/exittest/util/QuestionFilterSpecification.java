@@ -1,6 +1,7 @@
 package com.nagarro.training.java.exittest.util;
 
 import com.nagarro.training.java.exittest.entity.Question;
+import com.nagarro.training.java.exittest.enums.QuestionStatus;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,6 +17,10 @@ public final class QuestionFilterSpecification {
         return Specification.where(containsSubject(searchText)).or(containsBody(searchText).or(containsProductName(searchText)));
     }
 
+    public static Specification<Question> getSpecificationForQuestionStatus(QuestionStatus questionStatus) {
+        return Specification.where(equalsQuestionStatus("status", questionStatus.name()));
+    }
+
     private static Specification<Question> containsBody(String text) {
         return containsProperty("body", text);
     }
@@ -24,15 +29,19 @@ public final class QuestionFilterSpecification {
         return containsProperty("subject", text);
     }
 
+    private static Specification<Question> containsProductName(String text) {
+        return containsProperty("product.name", text);
+    }
+
     private static Specification<Question> containsProperty(String property, String value) {
         return (Root<Question> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) -> {
-            return criteriaBuilder.like(root.get(property), contains(value));
+            return criteriaBuilder.like(getPath(root, property).as(String.class), contains(value));
         };
     }
 
-    private static Specification<Question> containsProductName(String value) {
+    private static Specification<Question> equalsQuestionStatus(String property, String value) {
         return (Root<Question> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) -> {
-            return criteriaBuilder.like(getPath(root, "product.name").as(String.class), contains(value));
+            return criteriaBuilder.equal(getPath(root, property).as(String.class), value);
         };
     }
 
@@ -43,6 +52,7 @@ public final class QuestionFilterSpecification {
     /**
      * This is a generic implementation to get path of the property in case a filter needs to be applied to a child
      * entity of the table.
+     *
      * @param root
      * @param key
      * @return

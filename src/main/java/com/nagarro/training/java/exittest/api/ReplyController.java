@@ -1,17 +1,15 @@
-package com.nagarro.training.java.exittest.web.api;
+package com.nagarro.training.java.exittest.api;
 
 import com.nagarro.training.java.exittest.dto.AddReplyRequest;
 import com.nagarro.training.java.exittest.dto.ReplyResponse;
 import com.nagarro.training.java.exittest.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/reply")
 public class ReplyController {
 
