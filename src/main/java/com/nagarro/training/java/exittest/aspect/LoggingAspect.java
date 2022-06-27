@@ -21,15 +21,7 @@ public class LoggingAspect {
     public void controllers() {
         // Marker
     }
-//
-//    @Around("controllers()")
-//    public Object logExecutionTimeOfRestCalls(ProceedingJoinPoint jp) throws Throwable {
-//        long start = System.currentTimeMillis();
-//        Object o = jp.proceed();
-//        log.debug("Execution Time of {}.{} is ({}) ms.",
-//                jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName(), System.currentTimeMillis() - start);
-//        return o;
-//    }
+
 
     @Around("controllers()")
     public Object logMethodStartEndPoints(ProceedingJoinPoint jp) throws Throwable {
@@ -37,8 +29,6 @@ public class LoggingAspect {
         log.debug("Enter method :  {}.{}", jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName());
         Object o = jp.proceed();
         log.debug("Exit method :  {}.{}. Execution Time ({}) ms.", jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName(), System.currentTimeMillis() - start);
-//        log.debug("Execution Time of {}.{} is ({}) ms.",
-//                jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName(), System.currentTimeMillis() - start);
         return o;
     }
 

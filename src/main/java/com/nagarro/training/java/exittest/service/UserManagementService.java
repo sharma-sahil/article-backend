@@ -8,6 +8,8 @@ import com.nagarro.training.java.exittest.mapper.UserMapper;
 import com.nagarro.training.java.exittest.repository.UserRepository;
 import com.nagarro.training.java.exittest.security.UserPrincipal;
 import com.nagarro.training.java.exittest.util.SecurityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import java.util.Optional;
 
 @Service
 public class UserManagementService {
+
+    private static final Logger log = LoggerFactory.getLogger(UserManagementService.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -24,12 +28,16 @@ public class UserManagementService {
 
     public UserResponse createUser(CreateUserRequest request) {
 
+        log.info("Request received to create a new user with username : {}", request.getUsername());
+
         if (!request.getPassword().equals(request.getConfirmPassword())) {
+            log.error("Password and confirm password does not match with each other");
             throw new CustomException("Password and confirm password must match with each other", "invalid.password");
         }
 
         Optional<UserEntity> optionalUser = this.userRepository.findByUsername(request.getUsername());
         if (optionalUser.isPresent()) {
+            log.error("Request received to create a new user with username : {}", request.getUsername());
             throw new CustomException("A user with same username already exist. Please try another username",
                     "invalid.username");
         }

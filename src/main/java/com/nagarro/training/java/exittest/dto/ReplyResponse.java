@@ -12,6 +12,8 @@ public class ReplyResponse {
 
     private String username;
 
+    private boolean acceptedAnswer;
+
     public Long getId() {
         return id;
     }
@@ -42,5 +44,13 @@ public class ReplyResponse {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public boolean isAcceptedAnswer() {
+        return acceptedAnswer;
+    }
+
+    public void setAcceptedAnswer(boolean acceptedAnswer) {
+        this.acceptedAnswer = acceptedAnswer;
     }
 }

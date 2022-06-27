@@ -26,7 +26,7 @@ public class AuthService {
     public AuthResponse loginUser(LoginRequest loginRequest) {
 
         UserEntity userEntity = this.userRepository.findByUsernameAndPassword(loginRequest.getUsername(), loginRequest.getPassword())
-                .orElseThrow(() -> new CustomException("Invalid user credentials passed in the request", "invalid.credentials"));
+                .orElseThrow(() -> new CustomException("Invalid user credentials passed in the request. Please check credentials", "invalid.credentials"));
 
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(userEntity.getUsername());
