@@ -19,18 +19,19 @@ This application uses MySQL 8 as a database to store flights and users data. Mak
 
 Open MySQL Workbench and create a new database schema which will be used by this application. Run the below command to create a new database
 
-> `CREATE DATABASE exit_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
+> `CREATE DATABASE article_backend CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
 
 
 Once the database is created, then make sure the correct properties are present in the source code to connect to the database. To check the properties open the file `application.properties` present in the `src->main->resources` directory. 
 
-In the file, there are 2 properties for database username and password as mentioned below
+In the file, there are 3 properties for database connection as mentioned below
 ```
-spring.datasource.username={database_username}
-spring.datasource.password={database_password}
+spring.datasource.url=jdbc:mysql://localhost/${DATABASE_SCHEMA}?useSSL=false
+spring.datasource.username=${DATABASE_USERNAME}
+spring.datasource.password=${DATABASE_PASSWORD}
 ```
 
-Replace the values `{database_username}` and `{database_password}` with correct username and password for the local MySQL database.
+Replace the values `${DATABASE_USERNAME}`, `${DATABASE_PASSWORD}`, `${DATABASE_SCHEMA}`  with correct username, password and database schema respectively for the local MySQL database.
 
 ## Build Project
 
@@ -48,8 +49,8 @@ You can also build the project from command line. To build the project from comm
 > `mvn clean install`
 
 ## Start Server
-To start a spring boot server, right click on the project and then select the option "Run as" and in the run as option choose "Run as Spring boot application".
-This will start the server and server will be running on the 8080 port.
+To start a spring boot server, right click on the project and then select the option "Run as" and in the run as option choose `"Run as Spring boot application"`.
+This will start the server and server will be running on the `8080` port.
 
 
 
