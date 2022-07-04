@@ -1,5 +1,6 @@
 package sharma.sahil.learning.java.article.backend.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import sharma.sahil.learning.java.article.backend.dto.CreateUserRequest;
 import sharma.sahil.learning.java.article.backend.dto.UserResponse;
 import sharma.sahil.learning.java.article.backend.entity.UserEntity;
@@ -26,6 +27,9 @@ public class UserManagementService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public UserResponse createUser(CreateUserRequest request) {
 
         log.info("Request received to create a new user with username : {}", request.getUsername());
@@ -44,7 +48,7 @@ public class UserManagementService {
 
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(request.getUsername());
-        userEntity.setPassword(request.getPassword());
+        userEntity.setPassword(this.passwordEncoder.encode(request.getPassword()));
         userEntity.setFirstName(request.getFirstName());
         userEntity.setLastName(request.getLastName());
         userEntity = this.userRepository.save(userEntity);
